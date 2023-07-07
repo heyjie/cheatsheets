@@ -1,4 +1,3 @@
 {
-"cleanUrls": true,
 "routes": [{ "src": "/(?<name>[^/]+)", "dest": "/$name.html" }]
 }
