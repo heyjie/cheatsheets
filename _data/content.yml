@@ -1,50 +1,50 @@
 home:
-  title: "Rico's cheatsheets"
+  title: "开发者速查表"
   tagline: |
-    Hey! I'm <a href='https://ricostacruz.com'>@rstacruz</a> and this is a modest collection of cheatsheets I've written.
+    为开发者准备的速查表
 
 top_nav:
-  title: Devhints.io
-  edit: Edit
-  edit_on_github: Edit this page on GitHub
+  title: book.norhub.com.cn
+  edit: 编辑
+  edit_on_github: 在 GitHub 上编辑这个页面
 
 sheet:
-  suffix: cheatsheet
+  suffix: 速查表
 
 social_list:
-  default_description: "Ridiculous collection of web development cheatsheets"
-  description: "The ultimate cheatsheet for TITLE."
-  facebook_share: Share on Facebook
-  twitter_share: Share on Twitter
+  default_description: "荒谬的网页开发速查表集合"
+  description: "题目的终极速查表"
+  facebook_share: 在 Facebook 上分享
+  twitter_share: 在 Twitter 上分享
 
 related_posts_callout:
-  description: Over SIZE curated cheatsheets, by developers for developers.
-  link: Devhints home
+  description: 由开发人员为开发人员制作的超大型精选速查表。
+  link: 主页
 
 related_posts_group:
-  top: Top cheatsheets
-  other: Other cheatsheets
-  category: Other CATEGORY cheatsheets
+  top: 置顶速查表
+  other: 其他速查表
+  category: 其他类别速查表
 
 search_form:
-  default_placeholder: Search SIZE+ cheatsheets
-  home_placeholder: Search...
-  prefix: devhints.io
+  default_placeholder: 搜索大量速查表
+  home_placeholder: 搜索...
+  prefix: book.norhub.com.cn
 
 comments_area:
-  suffix: for this cheatsheet.
-  link: "Write yours!"
+  suffix: 为了这份速查表。
+  link: "写下你的吧!"
 
 not_found:
-  title: Not found
-  description: Sorry, we don't have a cheatsheet for this yet. Try searching!
-  home: Back to home
+  title: 未找到
+  description: 抱歉，我们还没有此内容的速查表。 试试搜索！
+  home: 返回主页
 
 announcement:
-  id: 2017-10-26-twitter
+  id: 2023-7-10-email
   title: |
-    New: We're on Twitter ♥️
+    新消息：有问题反馈
   body: |
-    Follow [@devhints](https://twitter.com/devhints) on Twitter for daily "today I learned" snippets!
+    在使用中有任何问题，欢迎反馈给我，可以用以下联系方式跟我交流!
 
-    [![](https://img.shields.io/twitter/follow/devhints.svg?style=social&label=@devhints)](https://twitter.com/devhints)
+    [![](http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_01.png)](http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=jv_997j0__v4zv--oO3h4w)
