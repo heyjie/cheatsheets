@@ -27,7 +27,7 @@ related_posts_group:
   category: 其他类别速查表
 
 search_form:
-  default_placeholder: 搜索大量速查表
+  default_placeholder: 搜索速查表
   home_placeholder: 搜索...
   prefix: book.norhub.com.cn
 
@@ -43,7 +43,7 @@ not_found:
 announcement:
   id: 2023-7-10-email
   title: |
-    新消息：有问题反馈
+    新消息：问题反馈
   body: |
     在使用中有任何问题，欢迎反馈给我，可以用以下联系方式跟我交流!
 

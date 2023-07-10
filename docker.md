@@ -4,54 +4,53 @@ category: Devops
 layout: 2017/sheet
 ---
 
-Manage images
--------------
 
 ### `docker build`
 
 ```yml
 docker build [options] .
-  -t "app/container_name"    # name
-  --build-arg APP_HOME=$APP_HOME    # Set build-time variables
+  -t, --tag "app/container_name"    # 名称和可选格式的标签
+  --build-arg APP_HOME=$APP_HOME    # 设置构建时变量
 ```
 
-Create an `image` from a Dockerfile.
+从 Dockerfile 创建镜像
 
 
 ### `docker run`
 
 ```yml
 docker run [options] IMAGE
-  # see `docker create` for options
+  # 见 `docker create` 中的选项
 ```
 
-#### Example
+#### 例子
 
 ```
 $ docker run -it debian:buster /bin/bash
 ```
-Run a command in an `image`.
+在镜像中运行一个命令。
 
-Manage containers
+容器 Container
 -----------------
 
 ### `docker create`
 
 ```yml
 docker create [options] IMAGE
-  -a, --attach               # attach stdout/err
-  -i, --interactive          # attach stdin (interactive)
-  -t, --tty                  # pseudo-tty
-      --name NAME            # name your image
-  -p, --publish 5000:5000    # port map (host:container)
-      --expose 5432          # expose a port to linked containers
-  -P, --publish-all          # publish all ports
-      --link container:alias # linking
-  -v, --volume `pwd`:/app    # mount (absolute paths needed)
-  -e, --env NAME=hello       # env vars
+  -a, --attach               # 附加到 STDIN、STDOUT 或 STDERR 上
+  -i, --interactive          # 附加标准输入 STDIN（交互式）
+  -t, --tty                  # 伪终端
+      --name NAME            # 为容器指定一个名称
+  -p, --publish 5000:5000    # 端口映射（主机：容器）
+      --expose 5432          # 将端口暴露给链接的容器
+  -P, --publish-all          # 发布所有端口
+      --link container:alias # 添加到另一个容器的链接
+  -v, --volume `pwd`:/app    # 挂载（需要绝对路径）
+  -e, --env NAME=hello       # 环境变量
+      --restart              # 容器退出时要应用的重启策略
 ```
 
-#### Example
+#### 例子
 
 ```
 $ docker create --name app_redis_1 \
@@ -59,49 +58,62 @@ $ docker create --name app_redis_1 \
   redis:3.0.2
 ```
 
-Create a `container` from an `image`.
+从镜像中创建一个容器
 
 ### `docker exec`
 
 ```yml
 docker exec [options] CONTAINER COMMAND
-  -d, --detach        # run in background
-  -i, --interactive   # stdin
-  -t, --tty           # interactive
+  -d, --detach        # 在后台运行
+  -i, --interactive   # 标准输入
+  -t, --tty           # 交互式终端
 ```
 
-#### Example
+#### 例子
 
 ```
 $ docker exec app_web_1 tail logs/development.log
 $ docker exec -t -i app_web_1 rails c
 ```
 
-Run commands in a `container`.
+在容器中运行一条命令
 
 
 ### `docker start`
 
 ```yml
 docker start [options] CONTAINER
-  -a, --attach        # attach stdout/err
-  -i, --interactive   # attach stdin
+  -a, --attach        # 附加 STDOUT/STDERR 和转发信号
+  -i, --interactive   # 附加容器的标准输入 STDIN
 
 docker stop [options] CONTAINER
+  -s, --signal        # 发送给容器的信号
+  -t, --time          # 停止容器前要等待的秒数
+
+docker restart [OPTIONS] CONTAINER
+  # 见 `docker stop` 中的选项
+
+docker pause CONTAINER   # 暂停一个或多个容器中的所有进程
+docker unpause CONTAINER   # 解除一个或多个容器内所有进程的暂停状态
 ```
 
-Start/stop a `container`.
+启动或停止一个容器
 
 
 ### `docker ps`
 
-```
-$ docker ps
-$ docker ps -a
-$ docker kill $ID
+```yml
+docker ps [OPTIONS]
+  -a, --all            # 显示所有容器（默认只显示正在运行的容器）
+  -q, --quiet          # 只显示容器的ID
 ```
 
-Manage `container`s using ps/kill.
+```sh
+$ docker ps -a
+$ docker kill $ID    # 关闭一个或多个正在运行的容器
+```
+
+使用 ps/kill 管理容器
 
 
 ### `docker logs`
@@ -112,10 +124,10 @@ $ docker logs $ID 2>&1 | less
 $ docker logs -f $ID # Follow log output
 ```
 
-See what's being logged in an `container`.
+看看在一个容器中记录了什么
 
 
-Images
+镜像 Images
 ------
 
 ### `docker images`
@@ -128,62 +140,77 @@ $ docker images
 ```
 
 ```sh
-$ docker images -a   # also show intermediate
+$ docker images -a   # 列出所有镜像（包含中间映像层）
+$ docker images -q   # 只显示镜像id
 ```
 
-Manages `image`s.
+```yml
+docker search [OPTIONS] CONTAINER    # 列出所有镜像（包含中间映像层）
+  --no-trunc         # 显示完整的镜像信息
+```
+
+```yml
+docker pull [OPTIONS] NAME[:TAG|@DIGEST]    # 下载镜像
+```
+
+管理镜像
 
 ### `docker rmi`
 
 ```yml
-docker rmi b750fe78269d
+docker image rm [OPTIONS] IMAGE
+  -f                  # 强制删除    
+docker rmi [OPTIONS] IMAGE    # 删除镜像(docker image rm的简化写法)
+  # 见 `docker image rm` 中的选项
+docker rmi `docker images -q`    # 删除所有的镜像
 ```
 
-Deletes `image`s.
+删除镜像
 
-## Clean up
+## 清理
 
-### Clean all
+### 清理所有
 
 ```sh
 docker system prune
 ```
 
-Cleans up dangling images, containers, volumes, and networks (ie, not associated with a container)
+清理挂起的镜像、容器、数据卷和网络（即与容器无关的）
 
 ```sh
 docker system prune -a
 ```
 
-Additionally remove any stopped containers and all unused images (not just dangling images)
+另外删除任何停止的容器和所有未使用的镜像（不仅仅是挂起的镜像）
 
-### Containers
+### 容器
 
 ```sh
-# Stop all running containers
+# 停止所有正在运行的容器
 docker stop $(docker ps -a -q)
 
-# Delete stopped containers
+# 删除已停止的容器
 docker container prune
 ```
 
-### Images
+### 镜像
 
 ```sh
 docker image prune [-a]
 ```
 
-Delete all the images
+删除所有的镜像
 
-### Volumes
+### 数据卷
 
 ```sh
 docker volume prune
 ```
 
-Delete all the volumes
+删除所有数据卷
 
-Also see
+另请参见
 --------
 
- * [Getting Started](https://www.docker.io/gettingstarted/) _(docker.io)_
+ * [开始使用 Docker](https://www.docker.com/get-started/) _(docker.io)_
+ * [Docker Hub 官网](https://hub.docker.com/) _(hub.docker.com)_
