@@ -11,10 +11,18 @@ layout: 2017/sheet
 docker build [options] .
   -t, --tag "app/container_name"    # 名称和可选格式的标签
   --build-arg APP_HOME=$APP_HOME    # 设置构建时变量
+  --file,-f                         # Dockerfile 的名称（默认为PATH/Dockerfile）
+  --pull                            # 始终尝试拉取更新版本的映像
+  --rm                              # 成功构建后删除中间容器（默认为true）
+```
+
+#### 例子
+
+```
+$ docker build --pull --rm -f "Dockerfile" -t cheatsheets:latest "." 
 ```
 
 从 Dockerfile 创建镜像
-
 
 ### `docker run`
 
@@ -93,7 +101,7 @@ docker stop [options] CONTAINER
 docker restart [OPTIONS] CONTAINER
   # 见 `docker stop` 中的选项
 
-docker pause CONTAINER   # 暂停一个或多个容器中的所有进程
+docker pause CONTAINER     # 暂停一个或多个容器中的所有进程
 docker unpause CONTAINER   # 解除一个或多个容器内所有进程的暂停状态
 ```
 
@@ -118,10 +126,10 @@ $ docker kill $ID    # 关闭一个或多个正在运行的容器
 
 ### `docker logs`
 
-```
+```sh
 $ docker logs $ID
 $ docker logs $ID 2>&1 | less
-$ docker logs -f $ID # Follow log output
+$ docker logs -f $ID    # 跟踪日志输出
 ```
 
 看看在一个容器中记录了什么
@@ -140,12 +148,12 @@ $ docker images
 ```
 
 ```sh
-$ docker images -a   # 列出所有镜像（包含中间映像层）
+$ docker images -a   # 列出所有镜像（包含中间镜像层）
 $ docker images -q   # 只显示镜像id
 ```
 
 ```yml
-docker search [OPTIONS] CONTAINER    # 列出所有镜像（包含中间映像层）
+docker search [OPTIONS] CONTAINER    # 搜索Docker Hub中的镜像
   --no-trunc         # 显示完整的镜像信息
 ```
 
@@ -160,7 +168,7 @@ docker pull [OPTIONS] NAME[:TAG|@DIGEST]    # 下载镜像
 ```yml
 docker image rm [OPTIONS] IMAGE
   -f                  # 强制删除    
-docker rmi [OPTIONS] IMAGE    # 删除镜像(docker image rm的简化写法)
+docker rmi [OPTIONS] IMAGE       # 删除镜像(docker image rm的简化写法)
   # 见 `docker image rm` 中的选项
 docker rmi `docker images -q`    # 删除所有的镜像
 ```

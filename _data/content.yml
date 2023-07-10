@@ -32,8 +32,8 @@ search_form:
   prefix: book.norhub.com.cn
 
 comments_area:
-  suffix: 为了这份速查表。
-  link: "写下你的吧!"
+  suffix: 为了完善这份速查表。
+  link: "写下你的评论吧!"
 
 not_found:
   title: 未找到
