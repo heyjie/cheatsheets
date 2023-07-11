@@ -17,8 +17,8 @@ docker build [options] .
 
 #### 例子
 
-```
-$ docker build --pull -f "Dockerfile" -t cheatsheets:latest "." 
+```sh
+docker build --pull -f "Dockerfile" -t cheatsheets:latest "." 
 ```
 
 从 Dockerfile 创建镜像
@@ -32,13 +32,13 @@ docker run [options] IMAGE
 
 #### 例子
 
+```sh
+docker run -it debian:buster /bin/bash
 ```
-$ docker run -it debian:buster /bin/bash
-```
+
 在镜像中运行一个命令。
 
-容器 Container
------------------
+## 容器 Container
 
 ### `docker create`
 
@@ -59,8 +59,8 @@ docker create [options] IMAGE
 
 #### 例子
 
-```
-$ docker create --name app_redis_1 \
+```sh
+docker create --name app_redis_1 \
   --expose 6379 \
   redis:3.0.2
 ```
@@ -70,7 +70,7 @@ $ docker create --name app_redis_1 \
 ### `docker exec`
 
 ```yml
-docker exec [options] CONTAINER COMMAND
+docker exec [options] CONTAINER COMMAND [ARG...]
   -d, --detach        # 在后台运行
   -i, --interactive   # 标准输入
   -t, --tty           # 交互式终端
@@ -78,12 +78,12 @@ docker exec [options] CONTAINER COMMAND
 
 #### 例子
 
-```
-$ docker exec app_web_1 tail logs/development.log
-$ docker exec -t -i app_web_1 rails c
+```sh
+docker exec -it mynginx /bin/sh /root/runoob.sh
+docker exec -it 9df70f9a0714 /bin/bash
 ```
 
-在容器中运行一条命令
+在容器中运行一条命令，或开启一个交互模式的终端
 
 
 ### `docker start`
@@ -116,39 +116,36 @@ docker ps [OPTIONS]
 ```
 
 ```sh
-$ docker ps -a
-$ docker kill $ID    # 关闭一个或多个正在运行的容器
+docker ps -a
+docker kill $ID    # 关闭一个或多个正在运行的容器
 ```
 
 使用 ps/kill 管理容器
 
-
 ### `docker logs`
 
 ```sh
-$ docker logs $ID
-$ docker logs $ID 2>&1 | less
-$ docker logs -f $ID    # 跟踪日志输出
+docker logs $ID
+docker logs $ID 2>&1 | less
+docker logs -f $ID    # 跟踪日志输出
 ```
 
 看看在一个容器中记录了什么
 
-
-镜像 Images
-------
+## 镜像 Images
 
 ### `docker images`
 
 ```sh
-$ docker images
+docker images
   REPOSITORY   TAG        ID
   ubuntu       12.10      b750fe78269d
   me/myapp     latest     7b2431a8d968
 ```
 
 ```sh
-$ docker images -a   # 列出所有镜像（包含中间镜像层）
-$ docker images -q   # 只显示镜像id
+docker images -a   # 列出所有镜像（包含中间镜像层）
+docker images -q   # 只显示镜像id
 ```
 
 ```yml
@@ -216,8 +213,7 @@ docker volume prune
 
 删除所有数据卷
 
-另请参见
---------
+## 另请参见
 
- * [开始使用 Docker](https://www.docker.com/get-started/) _(docker.io)_
- * [Docker Hub 官网](https://hub.docker.com/) _(hub.docker.com)_
+* [开始使用 Docker](https://www.docker.com/get-started/) _(docker.io)_
+* [Docker Hub 官网](https://hub.docker.com/) _(hub.docker.com)_

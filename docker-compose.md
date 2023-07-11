@@ -48,10 +48,10 @@ docker-compose down
 #### 例子
 
 ```sh
-$ docker-compose -f docker-compose-cheatsheets.yml -p cheatsheets up -d
+docker-compose -f docker-compose.yml -p cheatsheets up -d
 ```
 
-使用指定的compose模板文件，在后台启动并运行所有的容器。
+使用指定的 compose 模板文件，在后台启动并运行所有的容器。
 
 ## 参考
 {: .-three-column}
