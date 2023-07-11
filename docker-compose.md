@@ -7,7 +7,7 @@ weight: -1
 updated: 2020-01-01
 ---
 
-### Basic example
+### 基本示例
 
 ```yaml
 # docker-compose.yml
@@ -16,7 +16,7 @@ version: '2'
 services:
   web:
     build:
-    # build from Dockerfile
+    # 从 Dockerfile 构建
       context: ./Path
       dockerfile: Dockerfile
     ports:
@@ -27,7 +27,7 @@ services:
     image: redis
 ```
 
-### Commands
+### 启动命令
 
 ```sh
 docker-compose start
@@ -45,28 +45,36 @@ docker-compose up
 docker-compose down
 ```
 
-## Reference
+#### 例子
+
+```sh
+$ docker-compose -f docker-compose-cheatsheets.yml -p cheatsheets up -d
+```
+
+使用指定的compose模板文件，在后台启动并运行所有的容器。
+
+## 参考
 {: .-three-column}
 
-### Building
+### 构建
 
 ```yaml
 web:
-  # build from Dockerfile
+  # 从 Dockerfile 构建
   build: .
-  args:     # Add build arguments
+  args:     # 添加构建参数
     APP_HOME: app
 ```
 
 ```yaml
-  # build from custom Dockerfile
+  # 从自定义 Dockerfile 构建
   build:
     context: ./dir
     dockerfile: Dockerfile.dev
 ```
 
 ```yaml
-  # build from image
+  # 从镜像构建
   image: ubuntu
   image: ubuntu:14.04
   image: tutum/influxdb
@@ -74,7 +82,7 @@ web:
   image: a4bc65fd
 ```
 
-### Ports
+### 端口
 
 ```yaml
   ports:
@@ -83,28 +91,29 @@ web:
 ```
 
 ```yaml
-  # expose ports to linked services (not to host)
+  # 公开端口而不将它们发布到主机，它们只能由链接的服务访问。
+  # 只能指定内部端口。
   expose: ["3000"]
 ```
 
-### Commands
+### 命令
 
 ```yaml
-  # command to execute
+  # 执行命令
   command: bundle exec thin -p 3000
   command: [bundle, exec, thin, -p, 3000]
 ```
 
 ```yaml
-  # override the entrypoint
+  # 覆盖 Dockerfile 的 `entrypoint`
   entrypoint: /app/start.sh
   entrypoint: [php, -d, vendor/bin/phpunit]
 ```
 
-### Environment variables
+### 环境变量
 
 ```yaml
-  # environment vars
+  # 环境变量
   environment:
     RACK_ENV: development
   environment:
@@ -112,15 +121,15 @@ web:
 ```
 
 ```yaml
-  # environment vars from file
+  # 从文件添加环境变量
   env_file: .env
   env_file: [.env, .development.env]
 ```
 
-### Dependencies
+### 依赖关系
 
 ```yaml
-  # makes the `db` service available as the hostname `database`
+  # 使`db`服务可用作主机名`database`
   # (implies depends_on)
   links:
     - db:database
@@ -128,14 +137,14 @@ web:
 ```
 
 ```yaml
-  # make sure `db` is alive before starting
+  # 在启动之前确保`db`处于活动状态
   depends_on:
     - db
 ```
 
 ```yaml
-  # make sure `db` is healty before starting
-  # and db-init completed without failure
+  # 启动之前确保`db`状态健康
+  # 并且`db-init`已成功完成
   depends_on:
     db:
       condition: service_healthy
@@ -143,12 +152,12 @@ web:
       condition: service_completed_successfully
 ```
 
-### Other options
+### 其他选项
 
 ```yaml
-  # make this service extend another
+  # 使这项服务扩展到另一项服务
   extends:
-    file: common.yml  # optional
+    file: common.yml  # 可选项
     service: webapp
 ```
 
@@ -159,15 +168,15 @@ web:
 ```
 
 ```yaml
-  # automatically restart container
+  # 自动重启容器
   restart: unless-stopped
   # always, on-failure, no (default)
 ```
 
-## Advanced features
+## 高级功能
 {: .-three-column}
 
-### Labels
+### 标签 Labels
 
 ```yaml
 services:
@@ -176,7 +185,7 @@ services:
       com.example.description: "Accounting web app"
 ```
 
-### DNS servers
+### DNS 服务器
 
 ```yaml
 services:
@@ -187,7 +196,7 @@ services:
       - 8.8.4.4
 ```
 
-### Devices
+### 设备 Devices
 
 ```yaml
 services:
@@ -196,7 +205,7 @@ services:
     - "/dev/ttyUSB0:/dev/ttyUSB0"
 ```
 
-### External links
+### 外部链接 External links
 
 ```yaml
 services:
@@ -206,10 +215,10 @@ services:
       - project_db_1:mysql
 ```
 
-### Healthcheck
+### 健康检测 Healthcheck
 
 ```yaml
-    # declare service healthy when `test` command succeed
+    # 当`test`命令成功时声明服务正常
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost"]
       interval: 1m30s
@@ -218,7 +227,7 @@ services:
       start_period: 40s
 ```
 
-### Hosts
+### 额外的主机 Hosts
 
 ```yaml
 services:
@@ -227,28 +236,28 @@ services:
       - "somehost:192.168.1.100"
 ```
 
-### Network
+### 网络 Network
 
 ```yaml
-# creates a custom network called `frontend`
+# 创建一个名为`frontend`的自定义网络
 networks:
   frontend:
 ```
 
-### External network
+### 外部网络 External network
 
 ```yaml
-# join a pre-existing network
+# 加入已有的网络
 networks:
   default:
     external:
       name: frontend
 ```
 
-### Volume
+### 数据卷 Volume
 
 ```yaml
-# mount host paths or named volumes, specified as sub-options to a service
+# 挂载主机路径或命名卷，指定为服务的子选项
   db:
     image: postgres:latest
     volumes:
@@ -259,14 +268,14 @@ volumes:
   dbdata:
 ```
 
-### User
+### 用户 User
 
 ```yaml
-# specifying user
+# 指定用户
 user: root
 ```
 
 ```yaml
-# specifying both user and group with ids
+# 同时指定用户和组的id
 user: 0:0
 ```

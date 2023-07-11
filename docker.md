@@ -11,15 +11,14 @@ layout: 2017/sheet
 docker build [options] .
   -t, --tag "app/container_name"    # 名称和可选格式的标签
   --build-arg APP_HOME=$APP_HOME    # 设置构建时变量
-  --file,-f                         # Dockerfile 的名称（默认为PATH/Dockerfile）
-  --pull                            # 始终尝试拉取更新版本的映像
-  --rm                              # 成功构建后删除中间容器（默认为true）
+  --file,-f                         # Dockerfile 的名称
+  --pull                            # 始终尝试拉取更新版本的镜像
 ```
 
 #### 例子
 
 ```
-$ docker build --pull --rm -f "Dockerfile" -t cheatsheets:latest "." 
+$ docker build --pull -f "Dockerfile" -t cheatsheets:latest "." 
 ```
 
 从 Dockerfile 创建镜像
